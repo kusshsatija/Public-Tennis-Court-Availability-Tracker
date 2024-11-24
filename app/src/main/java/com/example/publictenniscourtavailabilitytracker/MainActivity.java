@@ -1,6 +1,8 @@
 package com.example.publictenniscourtavailabilitytracker;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+    //just using for testing
+    public void map (View view){
+        Intent intent = new Intent(MainActivity.this, Map.class);
+        startActivity(intent);
+    }
+
 }
