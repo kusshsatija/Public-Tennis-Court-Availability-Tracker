@@ -2,6 +2,7 @@ package com.example.publictenniscourtavailabilitytracker;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,6 +12,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.publictenniscourtavailabilitytracker.databinding.ActivityMapBinding;
 
@@ -58,6 +60,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         //adding markers
         //TO-DO add .icon() appropriately depending on availability level
         //example: mMap.addMarker(new MarkerOptions().position(KinsmenPark).title("Kinsmen Park").icon(greenMarker); if courts are available
+        // Adding markers with address in snippet
         mMap.addMarker(new MarkerOptions().position(KinsmenPark).title("Kinsmen Park"));
         mMap.addMarker(new MarkerOptions().position(HartwickPark).title("Hartwick Park"));
         mMap.addMarker(new MarkerOptions().position(ParkinsonRec).title("Parkinson Rec"));
@@ -67,18 +70,22 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(Gerstmar).title("Gerstmar Park"));
         mMap.addMarker(new MarkerOptions().position(Summerside).title("Summerside Park"));
 
-
-
-
-
-
-
-
         //adding zoom buttons
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         //setting up camera in kelowna and zoom
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kelowna, 11));
+
+        // Marker click listener to show dialog
+        mMap.setOnMarkerClickListener(marker -> {
+            String courtName = marker.getTitle();
+
+            // Show Court Details Dialog
+            CourtDetailsDialog dialog = CourtDetailsDialog.newInstance(courtName);
+            dialog.show(getSupportFragmentManager(), "CourtDetailsDialog");
+
+            return true;
+        });
 
     }
 }

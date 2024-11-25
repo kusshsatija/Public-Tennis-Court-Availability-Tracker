@@ -26,7 +26,8 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDJjipXzSbGegj26CBoLlIwkZurn3Ciu2A" />
+            android:value="AIzaSyCqDbdtdX-wTcgVeoKjbYZ6Ne3ILv9HC2w" /> <!-- Kussh's Key -->
+        <!--            android:value="AIzaSyDJjipXzSbGegj26CBoLlIwkZurn3Ciu2A" /> Ivona's Key -->
 
         <activity
             android:name=".Map"

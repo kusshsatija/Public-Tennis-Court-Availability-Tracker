@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="number_of_courts" type="id" />
+    <item name="timing" type="id" />
+    <item name="parking_spots" type="id" />
+    <item name="washroom_available" type="id" />
+</resources>
