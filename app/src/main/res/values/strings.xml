@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Public Tennis Court Availability Tracker</string>
     <string name="title_activity_map">Map</string>
+    <string name="no_comment">There are no comments for this court.</string>
 </resources>
