@@ -93,6 +93,13 @@ public class CourtDetailsDialog extends DialogFragment {
             dismiss(); // Dismiss the dialog after action
         });
 
+        Button commentButton = view.findViewById(R.id.commentsButton);
+        commentButton.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getActivity(), ReadComments.class);
+            intent.putExtra("courtName", courtName);
+            startActivity(intent);
+            dismiss();
+        });
         return view;
     }
 

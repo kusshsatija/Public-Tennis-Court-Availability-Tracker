@@ -11,9 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PublicTennisCourtAvailabilityTracker"
+<<<<<<< HEAD
         tools:targetApi="31" >
         <activity
             android:name=".AvailabilityPage"
+=======
+        tools:targetApi="31">
+        <activity
+            android:name=".CreateComment"
+            android:exported="false" />
+        <activity
+            android:name=".ReadComments"
+>>>>>>> 3111e774aef9b612718ad1abd3abd1cc2f498e01
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
