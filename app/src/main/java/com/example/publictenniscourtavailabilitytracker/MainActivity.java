@@ -28,4 +28,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, Map.class);
         startActivity(intent);
     }
+
+    //just using for testing
+    public void messages (View view){
+        Intent intent = new Intent(MainActivity.this, Messages.class);
+        startActivity(intent);
+    }
+
 }
