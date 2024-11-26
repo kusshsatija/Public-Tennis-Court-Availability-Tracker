@@ -36,7 +36,7 @@ public class AvailabilityPage extends AppCompatActivity {
 
     }
     private void generateCourtTextViews(int count) {
-        LinearLayout layout = findViewById(R.id.text_view_container); /
+        LinearLayout layout = findViewById(R.id.text_view_container);
         layout.removeAllViews(); // Clear any existing views
 
         for (int i = 0; i < count; i++) {
