@@ -1,6 +1,7 @@
 package com.example.publictenniscourtavailabilitytracker;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import androidx.fragment.app.DialogFragment;
 import java.util.HashMap;
 
 public class CourtDetailsDialog extends DialogFragment {
-
     // Map to store court details, keyed by the court name
     private static final HashMap<String, String[]> courtDetailsMap = new HashMap<>();
 
@@ -28,6 +28,7 @@ public class CourtDetailsDialog extends DialogFragment {
         courtDetailsMap.put("Gerstmar Park", new String[]{"955 Gerstmar Rd, Kelowna, BC V1X 4B8", "1", "8 AM - 8 PM", "35", "Not Avaliable"});
         courtDetailsMap.put("Summerside Park", new String[]{"3858 Summerside Dr, Kelowna, BC V1W 3Z6", "4", "6 AM - 12 PM", "5", "Avaliable"});
     }
+
 
     private String courtName;
 
@@ -78,6 +79,16 @@ public class CourtDetailsDialog extends DialogFragment {
 
         Button checkAvailabilityButton = view.findViewById(R.id.check_availability_button);
         checkAvailabilityButton.setOnClickListener(v -> {
+            // Create an Intent to start the new activity
+            Intent intent = new Intent(requireContext(), AvailabilityPage.class);
+
+            // Optionally, pass the court name or other details to the new activity
+            intent.putExtra("park_name", courtName);
+            Integer numofCourts = Integer.valueOf(courtDetails[1]);
+            intent.putExtra("numofCourts", numofCourts);
+            // Start the activity
+            startActivity(intent);
+
             // Handle the "Check Availability" button click
             dismiss(); // Dismiss the dialog after action
         });
@@ -95,4 +106,9 @@ public class CourtDetailsDialog extends DialogFragment {
                     (int) (getResources().getDisplayMetrics().heightPixels * 0.67));
         }
     }
+
+
+
+
+
 }
