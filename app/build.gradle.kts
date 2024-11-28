@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -46,4 +47,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(libs.google.scanner)
+    implementation(libs.play.services)
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
+    implementation(libs.camerax.video)
+
+    implementation(libs.camerax.extensions)
+
+
+
+
+
 }
