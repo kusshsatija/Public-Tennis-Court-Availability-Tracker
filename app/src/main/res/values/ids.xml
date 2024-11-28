@@ -4,4 +4,11 @@
     <item name="timing" type="id" />
     <item name="parking_spots" type="id" />
     <item name="washroom_available" type="id" />
+    <item name="buttonLayout" type="id" />
+    <item name="timePickerLayout" type="id" />
+    <item name="goBackButton" type="id" />
+    <item name="calendarHeader" type="id" />
+    <item name="calendarGrid" type="id" />
+    <item name="horizontalScrollView" type="id" />
+    <item name="availabilityTable" type="id" />
 </resources>

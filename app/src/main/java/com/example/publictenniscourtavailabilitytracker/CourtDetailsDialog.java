@@ -21,7 +21,7 @@ public class CourtDetailsDialog extends DialogFragment {
     static {
         courtDetailsMap.put("Kinsmen Park", new String[]{"2600 Abbott St, Kelowna, BC V1Y 1G4", "4", "6 AM - 10 PM", "20", "Avaliable"});
         courtDetailsMap.put("Hartwick Park", new String[]{"1468 Lambert Ave, Kelowna, BC V1Y 7H6", "2", "6 AM - 8 PM", "30", "Avaliable"});
-        courtDetailsMap.put("Parkinson Rec", new String[]{"1800 Parkinson Way, Kelowna, BC V1Y 4P9", "2", "6 AM - 11 PM", "50", "YeAvaliables"});
+        courtDetailsMap.put("Parkinson Rec", new String[]{"1800 Parkinson Way, Kelowna, BC V1Y 4P9", "2", "6 AM - 11 PM", "50", "Avaliables"});
         courtDetailsMap.put("Birkdale Park", new String[]{"363 Prestwick St, Kelowna, BC V1P 1R7", "2", "7 AM - 9 PM", "10", "Not Avaliable"});
         courtDetailsMap.put("City Park", new String[]{"1600 Abbott St, Kelowna, BC V1Y 1B7", "6", "6 AM - 10 PM", "30", "Avaliable"});
         courtDetailsMap.put("Blair Pond Park", new String[]{"333 Clifton Rd, Kelowna, BC V1V 1A4", "2", "8 AM - 10 PM", "15", "Avaliable"});
@@ -73,9 +73,19 @@ public class CourtDetailsDialog extends DialogFragment {
 
         Button bookNowButton = view.findViewById(R.id.book_now_button);
         bookNowButton.setOnClickListener(v -> {
-            // Handle the "Book Now" button click
-            dismiss(); // Dismiss the dialog after action
+            // Create an Intent to navigate to the BookingActivity
+            Intent intent = new Intent(requireContext(), Reservation.class);
+            // Pass the park details to the BookingActivity
+            intent.putExtra("park_name", courtName); // Park name
+            intent.putExtra("timings", courtDetails[2]); // Timings
+            intent.putExtra("num_of_courts", Integer.parseInt(courtDetails[1])); // Number of courts
+            // Start the BookingActivity
+            startActivity(intent);
+
+            // Dismiss the dialog
+            dismiss();
         });
+
 
         Button checkAvailabilityButton = view.findViewById(R.id.check_availability_button);
         checkAvailabilityButton.setOnClickListener(v -> {
