@@ -1,0 +1,161 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Confirmation Icon -->
+    <ImageView
+        android:id="@+id/ic_confirmation"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/ic_confirmation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/booking_confirmed_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Booking Confirmed"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/ic_confirmation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Content Section -->
+    <LinearLayout
+        android:id="@+id/content_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/booking_confirmed_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp">
+
+        <!-- Date Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_calender" />
+
+            <TextView
+                android:id="@+id/dialog_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Time Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_clock" />
+
+            <TextView
+                android:id="@+id/dialog_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Court Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_location" />
+
+            <TextView
+                android:id="@+id/dialog_court"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Court"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Park Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_user" />
+
+            <TextView
+                android:id="@+id/dialog_park_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Park Name"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:id="@+id/button_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/content_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/dialog_close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Close"
+            android:backgroundTint="#4CAF50"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/dialog_modify_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modify Booking"
+            android:backgroundTint="#2196F3"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/dialog_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel Booking"
+            android:backgroundTint="#F44336" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

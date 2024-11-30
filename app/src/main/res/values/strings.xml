@@ -2,4 +2,16 @@
     <string name="app_name">Public Tennis Court Availability Tracker</string>
     <string name="title_activity_map">Map</string>
     <string name="no_comment">There are no comments for this court.</string>
+    <string name="back_button_description">Go back button</string>
+    <string name="write_comment">Write Comment:</string>
+    <string name="comment">Comment</string>
+    <string name="enter_rating">Enter rating</string>
+    <string name="your_name">Your Name:</string>
+    <string name="name">Name</string>
+    <string name="create_comment">Create Comment</string>
+    <string name="court_name">Court Name</string>
+    <string name="submit_review">Submit Review</string>
+    <string name="scroll_view_for_comments">scroll view for comments</string>
+    <string name="add_comment">Add Comment</string>
+    <string name="comments">Comments</string>
 </resources>

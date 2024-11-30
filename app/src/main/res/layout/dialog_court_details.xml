@@ -214,6 +214,7 @@
             android:layout_weight="1"
             android:text="Check Availability" />
 
+        <!-- Comments Button -->
         <Button
             android:id="@+id/commentsButton"
             android:layout_width="0dp"

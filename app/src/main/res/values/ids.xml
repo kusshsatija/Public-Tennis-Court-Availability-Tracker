@@ -11,4 +11,17 @@
     <item name="calendarGrid" type="id" />
     <item name="horizontalScrollView" type="id" />
     <item name="availabilityTable" type="id" />
+    <item name="calendar_view" type="id" />
+    <item name="booked" type="id" />
+    <item name="cleaning" type="id" />
+    <item name="court_dropdown" type="id" />
+    <item name="hour_view_container" type="id" />
+    <item name="time_slot_header" type="id" />
+    <item name="court_time_grid" type="id" />
+    <item name="time_selection_container" type="id" />
+    <item name="textEditStartTime" type="id" />
+    <item name="startTimeDropdown" type="id" />
+    <item name="textEditEndTime" type="id" />
+    <item name="endTimeDropdown" type="id" />
+    <item name="go_back_button" type="id" />
 </resources>
