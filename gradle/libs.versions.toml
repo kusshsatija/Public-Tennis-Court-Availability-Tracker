@@ -14,6 +14,7 @@ gridlayout = "1.0.0"
 googleScanner = "16.1.0"
 playServices = "18.5.0"
 camerax = "1.5.0"
+roomCompiler = "2.6.1"
 
 styleableToast = "2.4.0"
 
@@ -38,6 +39,14 @@ camerax-lifecycle = "androidx.camera:camera-lifecycle:1.2.2"
 camerax-video = "androidx.camera:camera-video:1.2.2"
 camerax-view = "androidx.camera:camera-view:1.2.2"
 camerax-extensions = "androidx.camera:camera-extensions:1.2.2"
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+room-guava = { module = "androidx.room:room-guava", version.ref = "roomCompiler" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomCompiler" }
+room-paging = { module = "androidx.room:room-paging", version.ref = "roomCompiler" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomCompiler" }
+room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "roomCompiler" }
+room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "roomCompiler" }
+room-testing = { module = "androidx.room:room-testing", version.ref = "roomCompiler" }
 
 styleabletoast = { group = "io.github.muddz", name = "styleabletoast", version.ref = "styleableToast" }
 
