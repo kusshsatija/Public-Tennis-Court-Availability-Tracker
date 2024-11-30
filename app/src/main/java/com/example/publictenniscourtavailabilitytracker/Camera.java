@@ -22,6 +22,9 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanner;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions;
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import io.github.muddz.styleabletoast.StyleableToast;
 
 public class Camera extends AppCompatActivity {
@@ -46,6 +49,7 @@ public class Camera extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
 
 
 
@@ -145,6 +149,8 @@ public class Camera extends AppCompatActivity {
     public void scan_qr (View v){
         startScanning();
     }
+
+
 
 
 

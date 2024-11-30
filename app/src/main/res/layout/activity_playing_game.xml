@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f4f6f8"
     tools:context=".PlayingGame">
 
     <TextView
@@ -12,23 +13,28 @@
         android:layout_width="212dp"
         android:layout_height="78dp"
         android:layout_marginBottom="220dp"
+        android:background="@drawable/title_background"
         android:text="00:00"
         android:textAlignment="center"
+        android:textColor="#4faa79"
         android:textSize="50dp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/end_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/end_button"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginBottom="48dp"
+        android:background="@drawable/startgame_button"
         android:text="End Game"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

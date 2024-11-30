@@ -1,6 +1,7 @@
 package com.example.publictenniscourtavailabilitytracker;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -55,13 +56,13 @@ public class PlayingGame extends AppCompatActivity {
 
                 // Update the TextView with the formatted time
                 timer.setText(String.format("%02d:%02d Remaining", minutes, seconds));
-                timer.setBackgroundResource(R.drawable.rounded_timer_green);
+
             }
             @Override
             public void onFinish() {
                 // Update the TextView when the timer finishes
                 timer.setText("Time's up!");
-                timer.setBackgroundResource(R.drawable.rounded_timer_background); // change colour to red
+                timer.setTextColor(Color.parseColor("#ff3131"));
             }
         };
 
