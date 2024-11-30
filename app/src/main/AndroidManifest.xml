@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,15 +14,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PublicTennisCourtAvailabilityTracker"
-        >
+        android:theme="@style/Theme.PublicTennisCourtAvailabilityTracker">
+        <activity
+            android:name=".Camera"
+            android:exported="false" />
         <activity
             android:name=".Chat"
             android:exported="false" />
         <activity
             android:name=".Messages"
             android:exported="false" />
-
         <activity
             android:name=".AvailabilityPage"
             android:exported="false" />
@@ -42,8 +47,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCqDbdtdX-wTcgVeoKjbYZ6Ne3ILv9HC2w" /> <!-- Kussh's Key -->
-        <!--            android:value="AIzaSyDJjipXzSbGegj26CBoLlIwkZurn3Ciu2A" /> Ivona's Key -->
-
+        <!-- android:value="AIzaSyDJjipXzSbGegj26CBoLlIwkZurn3Ciu2A" /> Ivona's Key -->
         <activity
             android:name=".Map"
             android:exported="false"

@@ -60,4 +60,8 @@ public class CreateComment extends AppCompatActivity {
         finish();
     }
 
+    public void back(View v){
+        finish();
+    }
+
 }

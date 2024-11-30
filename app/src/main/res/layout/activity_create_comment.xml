@@ -11,20 +11,19 @@
         android:id="@+id/courtNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Court Name"
+        android:text="@string/court_name"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton2" />
 
     <TextView
         android:id="@+id/courtCommentHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Create Comment"
+        android:text="@string/create_comment"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,15 +49,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Your Name:" />
+                android:text="@string/your_name" />
 
             <EditText
                 android:id="@+id/enterAuthor"
                 android:layout_width="277dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:autofillHints="name"
                 android:ems="10"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:inputType="text"
                 android:minHeight="48dp" />
 
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Enter rating" />
+                android:text="@string/enter_rating" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -91,16 +91,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Write Comment:" />
+                android:text="@string/write_comment" />
 
             <EditText
                 android:id="@+id/enterComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:autofillHints="comment"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Comment"
+                android:hint="@string/comment"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp" />
         </TableRow>
@@ -113,9 +114,20 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:onClick="createComment"
-        android:text="Submit Review"
+        android:text="@string/submit_review"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="back"
+        android:contentDescription="@string/back_button_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
