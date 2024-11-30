@@ -2,6 +2,7 @@ package com.example.publictenniscourtavailabilitytracker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class Reservation extends AppCompatActivity {
     private Button bookNowButton;
 
     private List<String> timeSlots;
+    private String selectedDate; // To store the selected date
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,15 @@ public class Reservation extends AppCompatActivity {
         // Restrict calendar to current day and future dates
         setCalendarMinDate();
 
+        // Initialize the selected date to the current date
+        setInitialSelectedDate();
+
+        // Set a listener to get the selected date from the calendar
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            // Save the selected date in "yyyy-MM-dd" format
+            selectedDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
+        });
+
         // Populate spinners
         populateTimeSpinners(timings);
         populateCourtDropdown(numOfCourts);
@@ -66,6 +77,14 @@ public class Reservation extends AppCompatActivity {
         long currentDateMillis = Calendar.getInstance().getTimeInMillis();
         // Set the minimum date for the CalendarView
         calendarView.setMinDate(currentDateMillis);
+    }
+
+    private void setInitialSelectedDate() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        selectedDate = String.format("%04d-%02d-%02d", year, month + 1, day);
     }
 
     private void populateTimeSpinners(String timings) {
@@ -101,7 +120,6 @@ public class Reservation extends AppCompatActivity {
         }
         return timeSlots;
     }
-
 
     private int convertTo24Hour(String time) {
         boolean isPM = time.contains("PM");
@@ -141,33 +159,72 @@ public class Reservation extends AppCompatActivity {
     }
 
     private void setButtonListeners() {
-        goBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        goBackButton.setOnClickListener(v -> finish());
 
-        bookNowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String selectedCourt = courtDropdown.getSelectedItem().toString();
-                String selectedStartTime = startTimeDropdown.getSelectedItem().toString();
-                String selectedEndTime = endTimeDropdown.getSelectedItem().toString();
+        bookNowButton.setOnClickListener(v -> {
+            String selectedCourt = courtDropdown.getSelectedItem().toString();
+            String selectedStartTime = startTimeDropdown.getSelectedItem().toString();
+            String selectedEndTime = endTimeDropdown.getSelectedItem().toString();
+            // Ensure end time is after start time
+            String duration = calculateDuration(selectedStartTime, selectedEndTime);
+            // Send booking details to Map.java
+            Intent mapIntent = new Intent(Reservation.this, Map.class);
+            mapIntent.putExtra("selectedCourt", selectedCourt);
+            mapIntent.putExtra("selectedStartTime", selectedStartTime);
+            mapIntent.putExtra("selectedEndTime", selectedEndTime);
+            mapIntent.putExtra("duration", duration);
+            mapIntent.putExtra("selectedDate", selectedDate);
+            mapIntent.putExtra("parkName", parkName.getText().toString());
 
-                int startIndex = timeSlots.indexOf(selectedStartTime);
-                int endIndex = timeSlots.indexOf(selectedEndTime);
+            Log.d("Map", "Sending Intent Data:");
+            Log.d("Map", "Selected Court: " + selectedCourt);
+            Log.d("Map", "Start Time: " + selectedStartTime);
+            Log.d("Map", "End Time: " + selectedEndTime);
+            Log.d("Map", "duration: " + duration);
+            Log.d("Map", "Selected Date: " + selectedDate);
+            Log.d("Map", "Park Name: " + parkName);
 
-                if (endIndex <= startIndex) {
-                    Toast.makeText(Reservation.this, "End time must be after start time!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                String bookingMessage = "Court: " + selectedCourt + "\nStart Time: " + selectedStartTime + "\nEnd Time: " + selectedEndTime;
-                Toast.makeText(Reservation.this, "Booking Confirmed!\n" + bookingMessage, Toast.LENGTH_LONG).show();
-            }
+            startActivity(mapIntent);
         });
     }
+
+    private String calculateDuration(String selectedStartTime, String selectedEndTime) {
+        int startHour = convertTo24Hour(selectedStartTime);
+        int startMinute = getMinutes(selectedStartTime);
+        int endHour = convertTo24Hour(selectedEndTime);
+        int endMinute = getMinutes(selectedEndTime);
+        // Convert start and end times to total minutes since midnight
+        int startTotalMinutes = startHour * 60 + startMinute;
+        int endTotalMinutes = endHour * 60 + endMinute;
+        // Calculate the duration in minutes
+        int totalMinutes = endTotalMinutes - startTotalMinutes;
+        // Ensure the duration is positive
+        if (totalMinutes <= 0) {
+            return null;
+        }
+        // Convert total minutes into hours and minutes
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+        // Build the duration string
+        StringBuilder duration = new StringBuilder();
+        if (hours > 0) {
+            duration.append(hours).append(" hour");
+            if (hours > 1) {
+                duration.append("s");
+            }
+        }
+        if (minutes > 0) {
+            if (hours > 0) {
+                duration.append(" ");
+            }
+            duration.append(minutes).append(" minute");
+            if (minutes > 1) {
+                duration.append("s");
+            }
+        }
+        return duration.toString();
+    }
+
 
     private void setupStartTimeListener() {
         startTimeDropdown.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
