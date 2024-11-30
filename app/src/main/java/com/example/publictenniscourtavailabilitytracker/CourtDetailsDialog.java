@@ -89,18 +89,16 @@ public class CourtDetailsDialog extends DialogFragment {
 
         Button checkAvailabilityButton = view.findViewById(R.id.check_availability_button);
         checkAvailabilityButton.setOnClickListener(v -> {
-            // Create an Intent to start the new activity
             Intent intent = new Intent(requireContext(), AvailabilityPage.class);
 
-            // Optionally, pass the court name or other details to the new activity
+            // pass the court name or other details to the new activity
             intent.putExtra("park_name", courtName);
             Integer numofCourts = Integer.valueOf(courtDetails[1]);
             intent.putExtra("numofCourts", numofCourts);
             // Start the activity
             startActivity(intent);
 
-            // Handle the "Check Availability" button click
-            dismiss(); // Dismiss the dialog after action
+            dismiss(); //Dismiss the dialog after action
         });
 
         Button commentButton = view.findViewById(R.id.commentsButton);
