@@ -175,15 +175,6 @@ public class Reservation extends AppCompatActivity {
             mapIntent.putExtra("duration", duration);
             mapIntent.putExtra("selectedDate", selectedDate);
             mapIntent.putExtra("parkName", parkName.getText().toString());
-
-            Log.d("Map", "Sending Intent Data:");
-            Log.d("Map", "Selected Court: " + selectedCourt);
-            Log.d("Map", "Start Time: " + selectedStartTime);
-            Log.d("Map", "End Time: " + selectedEndTime);
-            Log.d("Map", "duration: " + duration);
-            Log.d("Map", "Selected Date: " + selectedDate);
-            Log.d("Map", "Park Name: " + parkName);
-
             startActivity(mapIntent);
         });
     }

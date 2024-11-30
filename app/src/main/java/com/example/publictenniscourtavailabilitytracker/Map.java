@@ -49,14 +49,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
             selectedEndTime = intent.getStringExtra("selectedEndTime");
             courtName = intent.getStringExtra("selectedCourt");
             duration = intent.getStringExtra("duration");
-
-            Log.d("Map", "Received Intent Data:");
-            Log.d("Map", "Selected Court: " + courtName);
-            Log.d("Map", "Start Time: " + selectedStartTime);
-            Log.d("Map", "End Time: " + selectedEndTime);
-            Log.d("Map", "duration: " + duration);
-            Log.d("Map", "Selected Date: " + selectedDate);
-            Log.d("Map", "Park Name: " + parkName);
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
