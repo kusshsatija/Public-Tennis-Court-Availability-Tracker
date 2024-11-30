@@ -5,63 +5,75 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f4f6f8"
     android:outlineSpotShadowColor="#995353"
     tools:context=".AvailabilityPage">
+
 
     <!-- Park Name TextView -->
 
     <!-- Container for TextViews -->
-
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_margin="25dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="52dp"
-        android:src="@drawable/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/park_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/title_background"
+        android:fontFamily="serif"
         android:text="Park Names"
         android:textAlignment="center"
+        android:textColor="#1f2122"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/text_view_container"
-        android:layout_width="333dp"
-        android:layout_height="461dp"
+        android:layout_width="323dp"
+        android:layout_height="467dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/park_name"
-        app:layout_constraintVertical_bias="0.158" />
+        app:layout_constraintVertical_bias="0.133">
 
-    <Button
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/start_game_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="28dp"
-        android:text="Start Game"
-        android:textColorLink="#D500F9"
-        android:tint="#FF5733"
         android:onClick="onStartGame"
+        android:text="Start Game"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/startgame_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_container"
-        app:layout_constraintVertical_bias="0.682" />
+        app:layout_constraintVertical_bias="0.22" />
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_margin="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

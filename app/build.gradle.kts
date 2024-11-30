@@ -58,6 +58,8 @@ dependencies {
 
     implementation(libs.camerax.extensions)
 
+    implementation(libs.styleabletoast)
+
 
 
 
