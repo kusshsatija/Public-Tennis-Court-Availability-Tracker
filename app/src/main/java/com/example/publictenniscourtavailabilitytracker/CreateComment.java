@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.room.Room;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -48,14 +49,14 @@ public class CreateComment extends AppCompatActivity {
         EditText commentInput = findViewById(R.id.enterComment);
         RatingBar ratingbar = findViewById(R.id.ratingBar);
 
-        Comment comment = new Comment(author.getText().toString(), ratingbar.getNumStars(), commentInput.getText().toString());
-        if(ReadComments.courtComments.containsKey(courtName)){
-            ReadComments.courtComments.get(courtName).add(comment);
-        }else{
-            LinkedList<Comment> list = new LinkedList<>();
-            list.add(comment);
-            ReadComments.courtComments.put(courtName, list);
-        }
+        Comment comment = new Comment(author.getText().toString(), ratingbar.getRating(), commentInput.getText().toString(), courtName);
+
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "comments").allowMainThreadQueries().build();
+        CommentDao userDao = db.userDao();
+
+        userDao.insertAll(comment);
+
 
         finish();
     }

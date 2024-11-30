@@ -60,6 +60,24 @@ dependencies {
 
 
 
+    implementation(libs.room.runtime)
+    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
+    // See Add the KSP plugin to your project
+    // If this project only uses Java source, use the Java annotationProcessor
+    // No additional plugins are necessary
+    annotationProcessor(libs.room.compiler)
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.room.ktx)
+    // optional - RxJava2 support for Room
+    implementation(libs.room.rxjava2)
+    // optional - RxJava3 support for Room
+    implementation(libs.room.rxjava3)
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation(libs.room.guava)
+    // optional - Test helpers
+    testImplementation(libs.room.testing)
+    // optional - Paging 3 Integration
+    implementation(libs.room.paging)
 
 
 }

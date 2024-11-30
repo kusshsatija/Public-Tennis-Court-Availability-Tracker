@@ -65,8 +65,8 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_width="130dp"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/ratingText"
@@ -75,11 +75,23 @@
                 android:layout_margin="8dp"
                 android:text="@string/enter_rating" />
 
-            <RatingBar
-                android:id="@+id/ratingBar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@android:style/Widget.Material.Light.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="1" />
+            </LinearLayout>
+
         </TableRow>
 
         <TableRow
@@ -124,8 +136,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:onClick="back"
         android:contentDescription="@string/back_button_description"
+        android:onClick="back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable" />
