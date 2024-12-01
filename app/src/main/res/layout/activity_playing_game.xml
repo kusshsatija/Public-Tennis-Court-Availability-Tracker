@@ -30,13 +30,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginBottom="48dp"
-        android:background="@drawable/startgame_button"
         android:text="End Game"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/button"/>
 
     <TextView
         android:id="@+id/park_court_nameTV"

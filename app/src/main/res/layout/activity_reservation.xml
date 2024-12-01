@@ -115,22 +115,24 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/go_back_button"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:text="Go Back"
             android:padding="16dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            style="@style/button"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/book_now_button"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:text="Book Now"
             android:padding="16dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            style="@style/button"/>
     </LinearLayout>
 </LinearLayout>
