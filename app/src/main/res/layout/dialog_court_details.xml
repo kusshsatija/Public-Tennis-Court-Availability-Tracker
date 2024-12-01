@@ -190,7 +190,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -198,9 +198,9 @@
         <!-- Book Now Button -->
         <Button
             android:id="@+id/book_now_button"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_margin="8dp"
             android:layout_weight="1"
             android:text="Book Now" />
 
@@ -208,16 +208,16 @@
 
         <Button
             android:id="@+id/check_availability_button"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_margin="8dp"
             android:layout_weight="1"
             android:text="Check Availability" />
 
         <!-- Comments Button -->
         <Button
             android:id="@+id/commentsButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
