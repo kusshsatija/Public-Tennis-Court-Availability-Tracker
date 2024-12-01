@@ -196,32 +196,35 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <!-- Book Now Button -->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/book_now_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="Book Now" />
+            android:text="Book Now"
+            style="@style/button"/>
 
         <!-- Check Availability Button -->
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/check_availability_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="Check Availability" />
+            android:text="Check Availability"
+            style="@style/button"/>
 
         <!-- Comments Button -->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/commentsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="Comments" />
+            android:text="Comments"
+            style="@style/button"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

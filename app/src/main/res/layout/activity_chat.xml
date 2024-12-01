@@ -48,7 +48,7 @@
         tools:ignore="HardcodedText" />
 
     <!-- Send Button -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,5 +58,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        style="@style/button"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
