@@ -53,7 +53,7 @@ public class CreateComment extends AppCompatActivity {
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "comments").allowMainThreadQueries().build();
-        CommentDao userDao = db.userDao();
+        CommentDao userDao = db.commentDao();
 
         userDao.insertAll(comment);
 

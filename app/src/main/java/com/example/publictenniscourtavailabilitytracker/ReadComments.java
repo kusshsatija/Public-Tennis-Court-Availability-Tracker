@@ -65,7 +65,7 @@ public class ReadComments extends AppCompatActivity {
     public void updateComments(){
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "comments").allowMainThreadQueries().build();
-        CommentDao commentDao = db.userDao();
+        CommentDao commentDao = db.commentDao();
 
         List<Comment> commentList = commentDao.listByCourt(courtName);
         if(commentList==null||commentList.isEmpty()){
