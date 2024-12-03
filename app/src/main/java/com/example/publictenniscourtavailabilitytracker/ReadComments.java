@@ -1,5 +1,6 @@
 package com.example.publictenniscourtavailabilitytracker;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -60,7 +61,7 @@ public class ReadComments extends AppCompatActivity {
         ratingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                addRatingDialog(view);
             }
         });
     }
@@ -96,6 +97,41 @@ public class ReadComments extends AppCompatActivity {
             ratingButton.setText("Edit Rating");
         }
 
+    }
+
+    public void addRatingDialog(View v) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_add_rating);
+
+        Button button = dialog.findViewById(R.id.addRatingButton);
+        RatingBar ratingBar = dialog.findViewById(R.id.ratingBar);
+
+        button.setOnClickListener(view -> {
+            float ratingFloat = ratingBar.getRating();
+            Rating rating = new Rating(MainActivity.userId, ratingFloat, courtName);
+
+            AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                    AppDatabase.class, "database").allowMainThreadQueries().build();
+            RatingDao ratingDao = db.ratingDao();
+
+            Rating rating2 = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+            if (rating2 != null) {
+                ratingDao.update(rating);
+            } else {
+                ratingDao.insert(rating);
+            }
+
+            CommentDao commentDao = db.commentDao();
+            Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+            if (comment != null) {
+                comment.rating = rating.rating;
+                commentDao.update(comment);
+            }
+
+            updateComments();
+
+            dialog.dismiss();
+        });
     }
 
 
