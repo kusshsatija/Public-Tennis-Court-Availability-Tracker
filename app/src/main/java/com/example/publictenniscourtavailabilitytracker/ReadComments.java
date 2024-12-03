@@ -55,6 +55,7 @@ public class ReadComments extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.courtNameText);
         textView.setText(courtName);
+
         updateComments();
 
         Button ratingButton = findViewById(R.id.addRatingButton);
@@ -64,6 +65,8 @@ public class ReadComments extends AppCompatActivity {
                 addRatingDialog(view);
             }
         });
+
+
     }
 
     public void addCommentPage(View v){
@@ -76,6 +79,7 @@ public class ReadComments extends AppCompatActivity {
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database").allowMainThreadQueries().build();
         CommentDao commentDao = db.commentDao();
+        RatingDao ratingDao = db.ratingDao();
 
         List<Comment> commentList = commentDao.listByCourt(courtName);
         TextView textView = findViewById(R.id.noCommentsText);
@@ -89,12 +93,16 @@ public class ReadComments extends AppCompatActivity {
             recyclerView.setAdapter(new CommentAdapter(commentList));
         }
 
-        RatingDao ratingDao = db.ratingDao();
         Rating rating = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
 
         if(rating!=null){
             Button ratingButton = findViewById(R.id.addRatingButton);
             ratingButton.setText("Edit Rating");
+        }
+        Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+        if(comment != null){
+            Button commentButton = findViewById(R.id.addCommentButton);
+            commentButton.setText("Edit Comment");
         }
 
     }
