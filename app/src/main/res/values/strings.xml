@@ -16,4 +16,6 @@
     <string name="comments">Comments</string>
     <string name="add_rating">Add Rating</string>
     <string name="select_rating">Select Rating</string>
+    <string name="edit_comment">Edit Comment</string>
+    <string name="edit_rating">Edit Rating</string>
 </resources>

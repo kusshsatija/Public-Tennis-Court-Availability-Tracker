@@ -45,7 +45,7 @@ public class CreateComment extends AppCompatActivity {
         Rating rating = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
         if(comment!=null){
 
-            button.setText("Edit Comment");
+            button.setText(R.string.edit_comment);
 
             EditText name = findViewById(R.id.enterAuthor);
             EditText commentText = findViewById(R.id.enterComment);

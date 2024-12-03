@@ -49,12 +49,7 @@ public class ReadComments extends AppCompatActivity {
         updateComments();
 
         Button ratingButton = findViewById(R.id.addRatingButton);
-        ratingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addRatingDialog(view);
-            }
-        });
+        ratingButton.setOnClickListener(this::addRatingDialog);
 
 
     }
@@ -87,12 +82,12 @@ public class ReadComments extends AppCompatActivity {
 
         if(rating!=null){
             Button ratingButton = findViewById(R.id.addRatingButton);
-            ratingButton.setText("Edit Rating");
+            ratingButton.setText(R.string.edit_rating);
         }
         Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
         if(comment != null){
             Button commentButton = findViewById(R.id.addCommentButton);
-            commentButton.setText("Edit Comment");
+            commentButton.setText(R.string.edit_comment);
         }
 
     }
@@ -110,7 +105,7 @@ public class ReadComments extends AppCompatActivity {
         Rating rating = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
         if(rating!=null){
             ratingBar.setRating(rating.rating);
-            button.setText("Edit Rating");
+            button.setText(R.string.edit_rating);
         }
 
         button.setOnClickListener(view -> {
