@@ -15,10 +15,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
 
-import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.LinkedList;
-
 public class CreateComment extends AppCompatActivity {
     private String courtName;
 

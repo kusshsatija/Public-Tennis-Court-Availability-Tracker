@@ -10,12 +10,6 @@ import java.util.List;
 
 @Dao
 public interface RatingDao {
-    @Query("SELECT * FROM rating")
-    List<Rating> getAll();
-
-    @Query("SELECT * FROM rating WHERE user_id = :userId LIMIT 1")
-    Rating findByUserId(String userId);
-
     @Query("SELECT * FROM rating WHERE user_id = :userId AND court_name = :court")
     Rating findByUserIdAndCourt(String userId, String court);
 
@@ -27,4 +21,5 @@ public interface RatingDao {
 
     @Delete
     void delete(Rating rating);
+
 }

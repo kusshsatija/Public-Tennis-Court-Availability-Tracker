@@ -10,15 +10,6 @@ import java.util.List;
 
 @Dao
 public interface CommentDao {
-    @Query("SELECT * FROM comment")
-    List<Comment> getAll();
-
-    @Query("SELECT * FROM comment WHERE user_id IN (:userIds)")
-    List<Comment> loadAllByIds(int[] userIds);
-
-    @Query("SELECT * FROM comment WHERE author = :author")
-    Comment findByName(String author);
-
     @Query("SELECT * FROM comment WHERE court_name LIKE :court")
     List<Comment> listByCourt(String court);
 
@@ -27,9 +18,6 @@ public interface CommentDao {
 
     @Insert
     void insertAll(Comment... comments);
-
-    @Insert
-    void insert(Comment comment);
 
     @Update
     void update(Comment comment);
