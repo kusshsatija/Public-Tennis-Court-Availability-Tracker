@@ -6,8 +6,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import java.util.List;
-
 @Dao
 public interface RatingDao {
     @Query("SELECT * FROM rating WHERE user_id = :userId AND court_name = :court")
