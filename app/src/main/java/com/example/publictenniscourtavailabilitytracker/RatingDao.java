@@ -11,6 +11,9 @@ public interface RatingDao {
     @Query("SELECT * FROM rating WHERE user_id = :userId AND court_name = :court")
     Rating findByUserIdAndCourt(String userId, String court);
 
+    @Query("SELECT AVG(rating) FROM rating WHERE court_name = :court")
+    Float getAvgByCourt(String court);
+
     @Insert
     void insert(Rating rating);
 

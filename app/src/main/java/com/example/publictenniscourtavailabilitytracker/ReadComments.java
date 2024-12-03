@@ -90,6 +90,14 @@ public class ReadComments extends AppCompatActivity {
             commentButton.setText(R.string.edit_comment);
         }
 
+        Float avgRating = ratingDao.getAvgByCourt(courtName);
+        RatingBar ratingBar = findViewById(R.id.ratingBar2);
+        if (avgRating==null){
+            ratingBar.setRating(0);
+        }else {
+            ratingBar.setRating(avgRating);
+        }
+
     }
 
     public void addRatingDialog(View v) {
