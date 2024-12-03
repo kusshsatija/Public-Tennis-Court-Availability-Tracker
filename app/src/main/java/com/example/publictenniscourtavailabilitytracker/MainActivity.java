@@ -27,6 +27,7 @@ import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static String userId = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

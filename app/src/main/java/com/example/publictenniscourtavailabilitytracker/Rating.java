@@ -8,10 +8,9 @@ import androidx.room.TypeConverters;
 
 import java.util.Date;
 
-@Entity
+@Entity(primaryKeys = {"user_id","court_name"})
 public class Rating {
 
-    @PrimaryKey
     @NonNull
     @ColumnInfo(name="user_id")
     public String userId;
@@ -20,6 +19,7 @@ public class Rating {
     @ColumnInfo(name="date")
     @TypeConverters(DateConverter.class)
     public Date date;
+    @NonNull
     @ColumnInfo(name="court_name")
     public String court;
 
@@ -28,7 +28,7 @@ public class Rating {
         this(userId, rating, new Date(), court);
     }
 
-    private Rating(@NonNull String userId, float rating, Date date, String court) {
+    private Rating(@NonNull String userId, float rating, Date date, @NonNull String court) {
         this.userId = userId;
         this.rating = rating;
         this.date = date;

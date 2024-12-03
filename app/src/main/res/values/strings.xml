@@ -14,4 +14,5 @@
     <string name="scroll_view_for_comments">scroll view for comments</string>
     <string name="add_comment">Add Comment</string>
     <string name="comments">Comments</string>
+    <string name="add_rating">Add Rating</string>
 </resources>

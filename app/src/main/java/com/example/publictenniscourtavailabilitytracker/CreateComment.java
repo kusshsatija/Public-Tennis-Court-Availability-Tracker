@@ -3,6 +3,7 @@ package com.example.publictenniscourtavailabilitytracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -39,6 +40,19 @@ public class CreateComment extends AppCompatActivity {
         TextView textview = findViewById(R.id.courtNameText);
         textview.setText(courtName);
 
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database").allowMainThreadQueries().build();
+        CommentDao commentDao = db.commentDao();
+        Button button = findViewById(R.id.submitReviewButton);
+        Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+
+        if(comment!=null){
+
+            button.setText("Edit Comment");
+        }
+
+
+
 
 
 
@@ -49,13 +63,19 @@ public class CreateComment extends AppCompatActivity {
         EditText commentInput = findViewById(R.id.enterComment);
         RatingBar ratingbar = findViewById(R.id.ratingBar);
 
-        Comment comment = new Comment(author.getText().toString(), ratingbar.getRating(), commentInput.getText().toString(), courtName);
+        Comment comment = new Comment(MainActivity.userId, author.getText().toString(), ratingbar.getRating(), commentInput.getText().toString(), courtName);
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "comments").allowMainThreadQueries().build();
-        CommentDao userDao = db.commentDao();
+                AppDatabase.class, "database").allowMainThreadQueries().build();
+        CommentDao commentDao = db.commentDao();
 
-        userDao.insertAll(comment);
+        Comment comment2 = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+
+        if(comment2!=null){
+            commentDao.update(comment);
+        }else {
+            commentDao.insertAll(comment);
+        }
 
 
         finish();
