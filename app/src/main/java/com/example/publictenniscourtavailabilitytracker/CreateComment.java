@@ -43,17 +43,26 @@ public class CreateComment extends AppCompatActivity {
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database").allowMainThreadQueries().build();
         CommentDao commentDao = db.commentDao();
+        RatingDao ratingDao = db.ratingDao();
         Button button = findViewById(R.id.submitReviewButton);
         Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
-
+        Rating rating = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
         if(comment!=null){
 
             button.setText("Edit Comment");
+
+            EditText name = findViewById(R.id.enterAuthor);
+            EditText commentText = findViewById(R.id.enterComment);
+            RatingBar ratingBar = findViewById(R.id.ratingBar);
+
+            ratingBar.setRating(comment.rating);
+            name.setText(comment.author);
+            commentText.setText(comment.commentText);
+        } else if (rating!=null) {
+            RatingBar ratingBar = findViewById(R.id.ratingBar);
+
+            ratingBar.setRating(rating.rating);
         }
-
-
-
-
 
 
     }
@@ -68,6 +77,7 @@ public class CreateComment extends AppCompatActivity {
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database").allowMainThreadQueries().build();
         CommentDao commentDao = db.commentDao();
+        RatingDao ratingDao = db.ratingDao();
 
         Comment comment2 = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
 
@@ -75,6 +85,14 @@ public class CreateComment extends AppCompatActivity {
             commentDao.update(comment);
         }else {
             commentDao.insertAll(comment);
+        }
+
+        Rating rating = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+        if(rating!=null){
+            ratingDao.update(new Rating(MainActivity.userId, comment.rating, courtName));
+
+        } else{
+            ratingDao.insert(new Rating(MainActivity.userId, comment.rating, courtName));
         }
 
 
