@@ -113,26 +113,32 @@ public class ReadComments extends AppCompatActivity {
 
         Button button = dialog.findViewById(R.id.addRatingButton);
         RatingBar ratingBar = dialog.findViewById(R.id.ratingBar);
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database").allowMainThreadQueries().build();
+        RatingDao ratingDao = db.ratingDao();
+
+        Rating rating = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+        if(rating!=null){
+            ratingBar.setRating(rating.rating);
+            button.setText("Edit Rating");
+        }
 
         button.setOnClickListener(view -> {
             float ratingFloat = ratingBar.getRating();
-            Rating rating = new Rating(MainActivity.userId, ratingFloat, courtName);
+            Rating rating2 = new Rating(MainActivity.userId, ratingFloat, courtName);
 
-            AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                    AppDatabase.class, "database").allowMainThreadQueries().build();
-            RatingDao ratingDao = db.ratingDao();
 
-            Rating rating2 = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
-            if (rating2 != null) {
-                ratingDao.update(rating);
+
+            if (rating != null) {
+                ratingDao.update(rating2);
             } else {
-                ratingDao.insert(rating);
+                ratingDao.insert(rating2);
             }
 
             CommentDao commentDao = db.commentDao();
             Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
             if (comment != null) {
-                comment.rating = rating.rating;
+                comment.rating = rating2.rating;
                 commentDao.update(comment);
             }
 
