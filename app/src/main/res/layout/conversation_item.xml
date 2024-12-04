@@ -8,13 +8,11 @@
     tools:context=".MainActivity">
 
     <!-- Profile Image -->
-
-    <!-- Text Container (Recipient Name and Recent Message) -->
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="24dp"
         android:scaleType="centerCrop"
         android:src="@drawable/common_full_open_on_phone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,18 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/recentMessageTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Recent message here"
-        android:textColor="#666666"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/recipientNameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/recipientNameTextView"
-        tools:ignore="HardcodedText" />
-
+    <!-- Recipient Name -->
     <TextView
         android:id="@+id/recipientNameTextView"
         android:layout_width="wrap_content"
@@ -46,5 +33,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
+
+    <!-- Recent Message -->
+    <TextView
+        android:id="@+id/recentMessageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Recent message here"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/recipientNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/recipientNameTextView"
+        tools:ignore="HardcodedText" />
+
+    <!-- Unread Badge -->
+    <ImageView
+        android:id="@+id/unreadBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/presence_online" />
+
+    <!-- Delete Button -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

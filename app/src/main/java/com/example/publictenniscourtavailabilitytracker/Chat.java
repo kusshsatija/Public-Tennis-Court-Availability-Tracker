@@ -1,38 +1,41 @@
 package com.example.publictenniscourtavailabilitytracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import java.util.List;
 
 public class Chat extends AppCompatActivity {
 
-    private Conversation conversation;
+    private String conversationName;  // To store the conversation name
     private ChatAdapter chatAdapter;
     private RecyclerView recyclerView;
     private EditText messageInput;
+    private MessageDao messageDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chat);
 
-        // Retrieve the conversation passed from the Messages activity
-        conversation = (Conversation) getIntent().getSerializableExtra("conversation");
+        // Initialize DAO
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "app_database").fallbackToDestructiveMigration().allowMainThreadQueries().build();
+        messageDao = db.messageDao();
 
-        if (conversation == null) {
-            // Handle the case where the conversation is null
-            finish(); // Or display an error message
+        // Retrieve the conversation name passed from the previous activity
+        conversationName = getIntent().getStringExtra("conversationName");
+        if (conversationName == null || conversationName.isEmpty()) {
+            Toast.makeText(this, "Conversation not found", Toast.LENGTH_SHORT).show();
+            finish();  // Close the activity if no conversation name is passed
             return;
         }
 
@@ -40,19 +43,32 @@ public class Chat extends AppCompatActivity {
         recyclerView = findViewById(R.id.chatRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Message> messages = conversation.getMessages();
-        chatAdapter = new ChatAdapter(messages); // Pass the conversation's messages to the adapter
-        recyclerView.setAdapter(chatAdapter);
-
         // Set up the message input field
         messageInput = findViewById(R.id.messageEditText);
 
-        // Set up the window insets for padding (status bars, etc.)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        // Load messages for the conversation
+        loadMessages();
+    }
+
+    // Load messages for the conversation from the database
+    private void loadMessages() {
+        new Thread(() -> {
+            List<Message> messages = messageDao.getMessagesByConversation(conversationName);
+            if (messages == null || messages.isEmpty()) {
+                runOnUiThread(() -> {
+                    Toast.makeText(Chat.this, "No messages found", Toast.LENGTH_SHORT).show();
+                });
+                return;
+            }
+
+            // Initialize the adapter with the messages (no need to reverse)
+            runOnUiThread(() -> {
+                chatAdapter = new ChatAdapter(messages);
+                recyclerView.setAdapter(chatAdapter);
+                // Scroll to the bottom to show the latest message initially
+                recyclerView.scrollToPosition(messages.size() - 1);
+            });
+        }).start();
     }
 
     // Handle sending a new message
@@ -60,21 +76,40 @@ public class Chat extends AppCompatActivity {
         String messageContent = messageInput.getText().toString();
 
         if (!messageContent.isEmpty()) {
-            // Create a new message and add it to the conversation
-            Message newMessage = new Message(messageContent, "You"); // Assuming the sender is "You"
-            conversation.addMessage(newMessage);
+            // Retrieve the recipientPic from the existing messages in this conversation
+            new Thread(() -> {
+                List<Message> messages = messageDao.getMessagesByConversation(conversationName);
+                if (messages == null || messages.isEmpty()) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(Chat.this, "Cannot send message without conversation context", Toast.LENGTH_SHORT).show();
+                    });
+                    return;
+                }
 
-            // Notify the adapter to update the RecyclerView
-            chatAdapter.notifyItemInserted(conversation.getMessages().size() - 1); // Scroll to the new message
-            recyclerView.scrollToPosition(conversation.getMessages().size() - 1);
+                int recipientPic = messages.get(0).getRecipientPic();  // Get the recipientPic from the first message
+
+                // Create a new message and associate it with the conversation
+                Message newMessage = new Message(conversationName, messageContent, "You", recipientPic, false);
+
+                // Update the database
+                messageDao.insertAll(newMessage);
+                List<Message> updatedMessages = messageDao.getMessagesByConversation(conversationName);
+
+                // Update the RecyclerView on the main thread
+                runOnUiThread(() -> {
+                    chatAdapter.updateMessages(updatedMessages);
+                    recyclerView.scrollToPosition(updatedMessages.size() - 1);
+                });
+            }).start();
 
             // Clear the input field
             messageInput.setText("");
         }
     }
 
-    // Handle finishing the activity (going back)
     public void finish(View view) {
+        Intent intent = new Intent(Chat.this, Messages.class);
+        startActivity(intent);
         finish();
     }
 }
