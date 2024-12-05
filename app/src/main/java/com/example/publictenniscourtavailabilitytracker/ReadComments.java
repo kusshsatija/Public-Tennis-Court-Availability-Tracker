@@ -71,6 +71,10 @@ public class ReadComments extends AppCompatActivity {
 
         if(commentList==null||commentList.isEmpty()){
             textView.setText(R.string.no_comment);
+            RecyclerView recyclerView = findViewById(R.id.commentsView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(new CommentAdapter(commentList));
+
         }else {
             textView.setText("");
             RecyclerView recyclerView = findViewById(R.id.commentsView);
@@ -83,11 +87,17 @@ public class ReadComments extends AppCompatActivity {
         if(rating!=null){
             Button ratingButton = findViewById(R.id.addRatingButton);
             ratingButton.setText(R.string.edit_rating);
+        }else{
+            Button ratingButton = findViewById(R.id.addRatingButton);
+            ratingButton.setText(R.string.add_rating);
         }
         Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
         if(comment != null){
             Button commentButton = findViewById(R.id.addCommentButton);
             commentButton.setText(R.string.edit_comment);
+        }else{
+            Button commentButton = findViewById(R.id.addCommentButton);
+            commentButton.setText(R.string.add_comment);
         }
 
         Float avgRating = ratingDao.getAvgByCourt(courtName);
@@ -111,9 +121,44 @@ public class ReadComments extends AppCompatActivity {
         RatingDao ratingDao = db.ratingDao();
 
         Rating rating = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+
+        Button deleteButton = dialog.findViewById(R.id.deleteRatingButton);
+
         if(rating!=null){
             ratingBar.setRating(rating.rating);
             button.setText(R.string.edit_rating);
+
+            deleteButton.setOnClickListener(view -> {
+
+                Dialog dialog2 = new Dialog(this);
+                dialog2.setContentView(R.layout.dialog_delete_rating);
+                dialog2.show();
+                Button confirm = dialog2.findViewById(R.id.deleteRatingButton);
+                confirm.setOnClickListener(view2 -> {
+                    float ratingFloat = ratingBar.getRating();
+                    Rating rating2 = new Rating(MainActivity.userId, ratingFloat, courtName);
+
+                    ratingDao.delete(rating2);
+
+                    CommentDao commentDao = db.commentDao();
+                    Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+                    if(comment!=null) {
+                        commentDao.delete(comment);
+                    }
+                    dialog2.dismiss();
+                    updateComments();
+                    dialog.dismiss();
+
+                });
+                Button cancelButton = dialog2.findViewById(R.id.cancelButton);
+                cancelButton.setOnClickListener(view2 ->{
+                    dialog2.dismiss();
+                });
+                updateComments();
+            });
+
+        }else{
+            deleteButton.setVisibility(View.GONE);
         }
 
         button.setOnClickListener(view -> {

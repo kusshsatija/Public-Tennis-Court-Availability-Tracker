@@ -1,5 +1,6 @@
 package com.example.publictenniscourtavailabilitytracker;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +42,7 @@ public class CreateComment extends AppCompatActivity {
         CommentDao commentDao = db.commentDao();
         RatingDao ratingDao = db.ratingDao();
         Button button = findViewById(R.id.submitReviewButton);
+        Button deleteButton = findViewById(R.id.deleteReviewButton);
         Comment comment = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
         Rating rating = ratingDao.findByUserIdAndCourt(MainActivity.userId, courtName);
         if(comment!=null){
@@ -54,11 +56,52 @@ public class CreateComment extends AppCompatActivity {
             ratingBar.setRating(comment.rating);
             name.setText(comment.author);
             commentText.setText(comment.commentText);
-        } else if (rating!=null) {
-            RatingBar ratingBar = findViewById(R.id.ratingBar);
+
 
             ratingBar.setRating(rating.rating);
+            button.setText(R.string.edit_rating);
+
+            deleteButton.setOnClickListener(view -> {
+
+                Dialog dialog2 = new Dialog(this);
+                dialog2.setContentView(R.layout.dialog_delete_comment);
+                dialog2.show();
+                Button deleteCommentButton = dialog2.findViewById(R.id.deleteCommentButton);
+                deleteCommentButton.setOnClickListener(view2 -> {
+                    Comment comment2 = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+                    commentDao.delete(comment2);
+
+                    finish();
+                });
+                Button deleteRatingButton = dialog2.findViewById(R.id.deleteRatingButton);
+                deleteRatingButton.setOnClickListener(view2 -> {
+                    float ratingFloat = ratingBar.getRating();
+                    Rating rating2 = new Rating(MainActivity.userId, ratingFloat, courtName);
+
+                    ratingDao.delete(rating2);
+                    dialog2.dismiss();
+
+                    Comment comment2 = commentDao.findByUserIdAndCourt(MainActivity.userId, courtName);
+                    commentDao.delete(comment2);
+                    finish();
+                });
+                Button cancelButton = dialog2.findViewById(R.id.cancelButton);
+                cancelButton.setOnClickListener(view2 ->{
+                    dialog2.dismiss();
+                });
+            });
+
+        } else {
+            if (rating!=null) {
+                RatingBar ratingBar = findViewById(R.id.ratingBar);
+
+                ratingBar.setRating(rating.rating);
+            }
+            deleteButton.setVisibility(View.GONE);
         }
+
+
+
 
 
     }

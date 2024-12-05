@@ -22,5 +22,4 @@ public interface RatingDao {
 
     @Delete
     void delete(Rating rating);
-
 }
