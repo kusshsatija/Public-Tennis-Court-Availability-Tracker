@@ -151,9 +151,7 @@ public class ReadComments extends AppCompatActivity {
 
                 });
                 Button cancelButton = dialog2.findViewById(R.id.cancelButton);
-                cancelButton.setOnClickListener(view2 ->{
-                    dialog2.dismiss();
-                });
+                cancelButton.setOnClickListener(view2 -> dialog2.dismiss());
                 updateComments();
             });
 
