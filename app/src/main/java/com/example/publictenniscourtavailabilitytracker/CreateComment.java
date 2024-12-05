@@ -59,7 +59,7 @@ public class CreateComment extends AppCompatActivity {
 
 
             ratingBar.setRating(rating.rating);
-            button.setText(R.string.edit_rating);
+            button.setText(R.string.edit_comment);
 
             deleteButton.setOnClickListener(view -> {
 
