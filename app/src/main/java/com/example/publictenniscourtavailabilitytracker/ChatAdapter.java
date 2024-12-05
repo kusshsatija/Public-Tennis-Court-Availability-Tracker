@@ -52,6 +52,13 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return messageList.size();
     }
 
+    // Add this method here, after onBindViewHolder
+    public void updateMessages(List<Message> newMessages) {
+        messageList.clear(); // Clear the current list
+        messageList.addAll(newMessages); // Add the updated messages
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
+    }
+
     public static class SentMessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageText;
 

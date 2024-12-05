@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PublicTennisCourtAvailabilityTracker">
         <activity
+            android:name=".ComposeActivity"
+            android:exported="false" />
+        <activity
             android:name=".PlayingGame"
             android:exported="false" />
         <activity

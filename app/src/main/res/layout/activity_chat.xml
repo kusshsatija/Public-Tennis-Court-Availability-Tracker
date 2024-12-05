@@ -17,6 +17,7 @@
         android:clickable="true"
         android:contentDescription="exitChatBtn"
         android:onClick="finish"
+        app:backgroundTint="#5b7d78"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable"

@@ -81,7 +81,6 @@ public class CourtDetailsDialog extends DialogFragment {
             intent.putExtra("num_of_courts", Integer.parseInt(courtDetails[1])); // Number of courts
             // Start the BookingActivity
             startActivity(intent);
-
             // Dismiss the dialog
             dismiss();
         });
