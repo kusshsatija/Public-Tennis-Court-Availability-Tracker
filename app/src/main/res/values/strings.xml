@@ -15,4 +15,13 @@
     <string name="add_comment">Add Comment</string>
     <string name="comments">Comments</string>
     <string name="select_recipient_prompt">Select a recipient</string>
+    <string name="add_rating">Add Rating</string>
+    <string name="select_rating">Select Rating</string>
+    <string name="edit_comment">Edit Comment</string>
+    <string name="edit_rating">Edit Rating</string>
+    <string name="delete_rating">Delete Rating</string>
+    <string name="confirm_delete_rating">Are you sure you want to delete your rating? This will also delete your comment.</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_comment">Delete comment</string>
+    <string name="delete_comment_and_rating">Delete comment and rating</string>
 </resources>

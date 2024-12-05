@@ -12,21 +12,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;    import android.os.Bundle;
-import android.os.Environment;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 
-
-
-
 public class MainActivity extends AppCompatActivity {
+    public static String userId = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -155,16 +155,46 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         modifyBookingButton.setOnClickListener(v -> {
             dialog.dismiss();
             Intent intent = new Intent(Map.this, Reservation.class);
+            intent.putExtra("selectedCourt", courtTitle); // Pass selected court info for editing
+            intent.putExtra("selectedStartTime", selectedStartTime); // Pass the selected start time
+            intent.putExtra("selectedEndTime", selectedEndTime); // Pass the selected end time
+            intent.putExtra("selectedDate", selectedDate); // Pass the selected date
+            intent.putExtra("parkName", parkName); // Pass park name
             startActivity(intent);
-            finish(); // Close the current activity
         });
         // Handle "Cancel Booking" button click
         cancelBookingButton.setOnClickListener(v -> {
             dialog.dismiss();
+
+            // Assuming the selectedCourt, selectedStartTime, selectedEndTime, and selectedDate are passed to this dialog
+            String selectedCourt = getIntent().getStringExtra("selectedCourt");
+            String selectedStartTime = getIntent().getStringExtra("selectedStartTime");
+            String selectedEndTime = getIntent().getStringExtra("selectedEndTime");
+            String selectedDate = getIntent().getStringExtra("selectedDate");
+            String parkName = getIntent().getStringExtra("parkName");
+
+            // Convert start and end time to minutes since midnight (same as your other time conversions)
+            int startMinutes = convertToMinutesSinceMidnight(selectedStartTime);
+            int endMinutes = convertToMinutesSinceMidnight(selectedEndTime);
+
+            // Cancel the booking by calling the delete method
+            BookingManager.deleteBooking(parkName, selectedCourt, selectedDate, startMinutes, endMinutes);
+
+            // Notify the user
             Toast.makeText(Map.this, "Booking cancelled", Toast.LENGTH_SHORT).show();
+
+            // Optionally, return to Map or any other relevant activity
+            Intent intent = new Intent(Map.this, Map.class);
+            startActivity(intent);
         });
         // Show the dialog
         dialog.show();
+    }
+    private int convertToMinutesSinceMidnight(String time) {
+        String[] parts = time.split(":");
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+        return hours * 60 + minutes;
     }
 
 }

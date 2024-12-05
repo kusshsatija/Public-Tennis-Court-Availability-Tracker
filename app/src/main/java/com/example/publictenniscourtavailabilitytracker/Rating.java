@@ -8,17 +8,13 @@ import androidx.room.TypeConverters;
 import java.util.Date;
 
 @Entity(primaryKeys = {"user_id","court_name"})
-public class Comment {
-    @NonNull
-    @ColumnInfo(name = "user_id")
-    public String userId;
+public class Rating {
 
-    @ColumnInfo(name="author")
-    public String author;
+    @NonNull
+    @ColumnInfo(name="user_id")
+    public String userId;
     @ColumnInfo(name="rating")
     public float rating;
-    @ColumnInfo(name="comment_text")
-    public String commentText;
     @ColumnInfo(name="date")
     @TypeConverters(DateConverter.class)
     public Date date;
@@ -27,15 +23,13 @@ public class Comment {
     public String court;
 
 
-    public Comment(String userId, String author, float rating, String commentText, String court){
-        this(userId, author, rating, commentText, new Date(), court);
+    public Rating(String userId, float rating, String court){
+        this(userId, rating, new Date(), court);
     }
 
-    private Comment(@NonNull String userId, String author, float rating, String commentText, Date date, @NonNull String court) {
+    private Rating(@NonNull String userId, float rating, Date date, @NonNull String court) {
         this.userId = userId;
-        this.author = author;
         this.rating = rating;
-        this.commentText = commentText;
         this.date = date;
         this.court = court;
     }
