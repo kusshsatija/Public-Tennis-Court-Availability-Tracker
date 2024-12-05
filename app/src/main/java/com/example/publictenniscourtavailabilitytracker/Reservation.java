@@ -97,6 +97,7 @@ public class Reservation extends AppCompatActivity {
                 mapIntent.putExtra("selectedEndTime", selectedEndTime);
                 mapIntent.putExtra("selectedDate", selectedDate);
                 mapIntent.putExtra("parkName", parkName.getText().toString());
+                mapIntent.putExtra("duration", calculateDuration(selectedStartTime, selectedEndTime));
                 startActivity(mapIntent);
             });
         setupStartTimeListener();
