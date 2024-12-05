@@ -55,7 +55,7 @@ public class PlayingGame extends AppCompatActivity {
                 long seconds = (millisUntilFinished / 1000) % 60;
 
                 // Update the TextView with the formatted time
-                timer.setText(String.format("%02d:%02d Remaining", minutes, seconds));
+                timer.setText(String.format("%02d:%02d", minutes, seconds));
 
             }
             @Override

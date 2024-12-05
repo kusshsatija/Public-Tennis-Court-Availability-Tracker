@@ -129,7 +129,8 @@ public class AvailabilityPage extends AppCompatActivity {
                     if ("Free to Play".equals(timerTextView.getText())) {
                         timerTextView.setBackgroundResource(R.drawable.when_clicked); // Selected free court
                     } else {
-                        timerTextView.setBackgroundResource(R.drawable.when_clicked_red); // Selected occupied court
+                       // timerTextView.setBackgroundResource(R.drawable.when_clicked_red); // Selected occupied court
+                        StyleableToast.makeText(AvailabilityPage.this, "Court is in use. Please select a free court to play!", R.style.exampleToast).show();
                     }
                 }
             });

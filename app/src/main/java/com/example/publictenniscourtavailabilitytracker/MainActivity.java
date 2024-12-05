@@ -86,10 +86,8 @@ public class MainActivity extends AppCompatActivity {
             fos = new FileOutputStream(file);
             fos.write(data.getBytes());
             fos.close();
-            Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error saving data", Toast.LENGTH_SHORT).show();
         } finally {
             if (fos != null) {
                 try {

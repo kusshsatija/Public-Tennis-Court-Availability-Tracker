@@ -16,7 +16,7 @@
         <item name="stSolidBackground">true</item>
         <item name="stStrokeWidth">5dp</item>
         <item name="stStrokeColor">#5D7F6D</item>
-        <item name="stLength">SHORT</item> LONG or SHORT
+        <item name="stLength">LONG</item> LONG or SHORT
         <item name="stRadius">20dp</item>
     </style>
 
