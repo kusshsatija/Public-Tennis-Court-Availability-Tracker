@@ -54,13 +54,13 @@ public class PlayingGame extends AppCompatActivity {
                 long minutes = (millisUntilFinished / 1000) / 60;
                 long seconds = (millisUntilFinished / 1000) % 60;
 
-                // Update the TextView with the formatted time
+                //update the TextView with the formatted time
                 timer.setText(String.format("%02d:%02d", minutes, seconds));
 
             }
             @Override
             public void onFinish() {
-                // Update the TextView when the timer finishes
+                //update the TextView when the timer finishes
                 timer.setText("Time's up!");
                 timer.setTextColor(Color.parseColor("#ff3131"));
             }
@@ -69,7 +69,7 @@ public class PlayingGame extends AppCompatActivity {
         // Start the timer
         countDownTimer.start();
 
-        // Set an OnClickListener to handle the back navigation
+        //end button functinality
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

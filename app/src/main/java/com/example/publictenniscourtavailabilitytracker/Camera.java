@@ -2,6 +2,7 @@ package com.example.publictenniscourtavailabilitytracker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,9 +28,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.muddz.styleabletoast.StyleableToast;
 
 public class Camera extends AppCompatActivity {
@@ -62,14 +60,18 @@ public class Camera extends AppCompatActivity {
         QRid = findViewById(R.id.QReditText);
         submitID = findViewById(R.id.submit_button);
 
+        //remove those annoying things
+        QRid.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+        //make the file and read from it
         createFile();
         readFile();
 
-        // Set OnClickListener for the button
+        //set OnClickListener for the button
         submitID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the text entered by the user
+                //get the text entered by the user
                 String userInput = QRid.getText().toString();
 
                 if(userInput.equals(ID)){
@@ -84,13 +86,11 @@ public class Camera extends AppCompatActivity {
             }
         });
 
-
-
-        // Initialize the scanner
+        //Initialize the scanner
         GmsBarcodeScannerOptions options = initializeGoogleScanner();
         scanner = GmsBarcodeScanning.getClient(this, options);
 
-        // Set up back button functionality
+        //set up back button functionality
         ImageView backButton = findViewById(R.id.backBtn);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -105,20 +105,18 @@ public class Camera extends AppCompatActivity {
     private void installGoogleScanner() {
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
 
-        // Check if Google Play services is available
+        //Check if Google Play services is available
         int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
         if (resultCode == com.google.android.gms.common.ConnectionResult.SUCCESS) {
-            // Google Play Services is available
+            //Google Play Services is available
             isScannerInstalled = true;
         } else {
-            // Google Play Services is not available
+            //Google Play Services is not available
             isScannerInstalled = false;
-            StyleableToast.makeText(Camera.this, "Google Play Services not available: "+ resultCode, R.style.exampleToast).show();
+            StyleableToast.makeText(Camera.this, "Something went wrong ! Try again", R.style.exampleToast).show();
         }
     }
-
-
-
+    //for barcode
     private GmsBarcodeScannerOptions initializeGoogleScanner() {
         return new GmsBarcodeScannerOptions.Builder()
                 .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
@@ -126,20 +124,20 @@ public class Camera extends AppCompatActivity {
                 .build();
     }
 
-
     private void startScanning() {
         if (isScannerInstalled) {
-            // Start scanning immediately
+            //start scanning immediately
             scanner.startScan()
                     .addOnSuccessListener(barcode -> {
                         scannedValue = barcode.getRawValue();
-
+                        //does barcode equal the id it is supposed to
                         if (scannedValue.equals(ID)) {
                             Intent intent = new Intent(Camera.this, PlayingGame.class);
                             intent.putExtra("ParkName", ParkName);
                             intent.putExtra("courtId", CourtId);
                             startActivity(intent);
                         }else{
+                            //if wrong qr code is scanned
                             StyleableToast.makeText(Camera.this, "Incorrect QR code, please try again.", R.style.exampleToast).show();
                         }
                     })
@@ -164,10 +162,10 @@ public class Camera extends AppCompatActivity {
                 "Gerstmar Park|V7Y3\n" +
                 "Summerside Park|H8Z5\n";
 
-        // Create or write to a file
+        //write to a file
         FileOutputStream fos = null;
         try {
-            // Create a file in the app's internal storage
+            //create a file internally
             File file = new File(getFilesDir(), "QRid_data.txt");
             fos = new FileOutputStream(file);
             fos.write(data.getBytes());
@@ -187,15 +185,14 @@ public class Camera extends AppCompatActivity {
     }
 
     public void readFile() {
-        // Use the same directory as when creating the file
         File file = new File(getFilesDir(), "QRid_data.txt");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Check if the line contains "|"
                 if (line.contains("|")) {
-                    String[] parts = line.split("\\|", 2); // Split at the first occurrence of "|"
+                    String[] parts = line.split("\\|", 2);
+                    //if its at the park that user selected, get the qr id from it
                     if (ParkName.equals(parts[0])) {
                         ID = parts[1];
                     }
@@ -205,7 +202,4 @@ public class Camera extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
-
 }
