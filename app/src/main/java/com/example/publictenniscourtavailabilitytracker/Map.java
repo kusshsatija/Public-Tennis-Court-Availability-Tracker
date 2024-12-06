@@ -206,6 +206,10 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         return hours * 60 + minutes;
     }
 
+    public void back(View v){
+        finish();
+    }
+
 
 
 }
