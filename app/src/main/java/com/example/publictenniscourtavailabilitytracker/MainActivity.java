@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.room.Room;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         createFile();
+        addReviews();
     }
     //just using for testing
     public void map (View view){
@@ -86,6 +88,25 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+    }
+
+    public void addReviews() {
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database").allowMainThreadQueries().build();
+        CommentDao commentDao = db.commentDao();
+
+        Comment[] comments = {
+                new Comment("user1", "Tom", 3, "Honestly a very mid tennis court like it is mid in every way. It is not a bad tennis court but it is no a good tennis court just very mid.", "Gerstmar Park"),
+                new Comment("user2", "Bobby", 5, "Best tennis court I have every played on. I have never seen a better tennis court in my whole entire life.", "Summerside Park"),
+                new Comment("user1", "Tom", 4, "Decent tennis court, unlike the Gerstmar tennis court this tennis court is good instead of mid.","Summerside Park"),
+                new Comment("user3", "Jess", 1, "Horrible tennis court. I refuse to elaborate.", "City Park"),
+                new Comment("user3", "Jess", 5, "Best tennis court ever!!1!!!111!!!", "Blair Pond Park")
+        };
+        for(Comment comment:comments){
+            if(commentDao.findByUserIdAndCourt(comment.userId,comment.court)==null){
+                commentDao.insertAll(comment);
             }
         }
     }
