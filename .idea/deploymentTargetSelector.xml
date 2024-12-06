@@ -2,12 +2,12 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="Public Tennis Court Availability Tracker">
+      <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-12-02T20:52:32.544236900Z">
+        <DropdownSelection timestamp="2024-12-05T08:34:37.078029Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\kp654\.android\avd\Pixel_3a_API_33.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ivona\.android\avd\Pixel_3a_API_35_1.avd" />
             </handle>
           </Target>
         </DropdownSelection>

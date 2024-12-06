@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.publictenniscourtavailabilitytracker.databinding.ActivityMapBinding;
+
 
 public class Map extends FragmentActivity implements OnMapReadyCallback {
 
@@ -58,6 +61,12 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         if (courtName != null) {
             showBookingConfirmationDialog(courtName);
         }
+
+
+
+
+
+
     }
 
     @Override
@@ -196,5 +205,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         int minutes = Integer.parseInt(parts[1]);
         return hours * 60 + minutes;
     }
+
+
 
 }
