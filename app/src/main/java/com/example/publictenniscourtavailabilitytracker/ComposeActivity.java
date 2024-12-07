@@ -15,6 +15,8 @@ import androidx.room.Room;
 
 import java.util.HashMap;
 
+import io.github.muddz.styleabletoast.StyleableToast;
+
 public class ComposeActivity extends AppCompatActivity {
 
     private AppDatabase database;
@@ -65,7 +67,7 @@ public class ComposeActivity extends AppCompatActivity {
             String messageText = messageEditText.getText().toString().trim();
 
             if (selectedRecipient == null || messageText.isEmpty()) {
-                Toast.makeText(this, "Please select a recipient and enter a message", Toast.LENGTH_SHORT).show();
+                StyleableToast.makeText(this, "Please select a recipient and enter a message", Toast.LENGTH_SHORT, R.style.exampleToast).show();
                 return;
             }
 

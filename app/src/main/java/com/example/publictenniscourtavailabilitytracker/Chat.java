@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import java.util.List;
+import io.github.muddz.styleabletoast.StyleableToast;
+
 
 public class Chat extends AppCompatActivity {
 
@@ -34,7 +36,7 @@ public class Chat extends AppCompatActivity {
         // Retrieve the conversation name passed from the previous activity
         conversationName = getIntent().getStringExtra("conversationName");
         if (conversationName == null || conversationName.isEmpty()) {
-            Toast.makeText(this, "Conversation not found", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(this, "Conversation not found", Toast.LENGTH_SHORT, R.style.exampleToast).show();
             finish();  // Close the activity if no conversation name is passed
             return;
         }
@@ -56,7 +58,7 @@ public class Chat extends AppCompatActivity {
             List<Message> messages = messageDao.getMessagesByConversation(conversationName);
             if (messages == null || messages.isEmpty()) {
                 runOnUiThread(() -> {
-                    Toast.makeText(Chat.this, "No messages found", Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(Chat.this, "No messages found", Toast.LENGTH_SHORT, R.style.exampleToast).show();
                 });
                 return;
             }
@@ -81,7 +83,7 @@ public class Chat extends AppCompatActivity {
                 List<Message> messages = messageDao.getMessagesByConversation(conversationName);
                 if (messages == null || messages.isEmpty()) {
                     runOnUiThread(() -> {
-                        Toast.makeText(Chat.this, "Cannot send message without conversation context", Toast.LENGTH_SHORT).show();
+                        StyleableToast.makeText(Chat.this, "Cannot send message without conversation context", Toast.LENGTH_SHORT, R.style.exampleToast).show();
                     });
                     return;
                 }

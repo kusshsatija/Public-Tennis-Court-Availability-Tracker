@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import io.github.muddz.styleabletoast.StyleableToast;
+
 public class Reservation extends AppCompatActivity {
     private TextView parkName;
     private CalendarView calendarView;
@@ -77,7 +79,7 @@ public class Reservation extends AppCompatActivity {
                 int endMinutes = convertToMinutesSinceMidnight(selectedEndTime);
 
                 if (BookingManager.isCourtBooked(selectedParkName, selectedCourt, selectedDate, startMinutes, endMinutes)) {
-                    Toast.makeText(this, "Court is already booked for the selected time range", Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(this, "Court is already booked for the selected time range", Toast.LENGTH_SHORT, R.style.exampleToast).show();
                     return;
                 }
                 // If modifying an existing booking, delete the old one before adding the new one
@@ -92,7 +94,7 @@ public class Reservation extends AppCompatActivity {
 
                 updateAvailability(selectedParkName, selectedCourt);
                 // Notify user and go back to map
-                Toast.makeText(this, "Booking Confirmed!", Toast.LENGTH_SHORT).show();
+                StyleableToast.makeText(this, "Booking Confirmed!", Toast.LENGTH_SHORT, R.style.exampleToast).show();
                 Intent mapIntent = new Intent(Reservation.this, Map.class);
                 mapIntent.putExtra("selectedCourt", selectedCourt);
                 mapIntent.putExtra("selectedStartTime", selectedStartTime);
@@ -118,13 +120,13 @@ public class Reservation extends AppCompatActivity {
     private void populateTimeSpinners(String timings) {
         String[] timeRange = timings.split(" - ");
         if (timeRange.length != 2) {
-            Toast.makeText(this, "Invalid timing format", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(this, "Invalid timing format", Toast.LENGTH_SHORT, R.style.exampleToast).show();
             return;
         }
         String startTime = convertTo24HourFormat(timeRange[0]);
         String endTime = convertTo24HourFormat(timeRange[1]);
         if (startTime == null || endTime == null) {
-            Toast.makeText(this, "Invalid timing format", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(this, "Invalid timing format", Toast.LENGTH_SHORT, R.style.exampleToast).show();
             return;
         }
         // Generate time slots between start and end times
@@ -294,7 +296,7 @@ public class Reservation extends AppCompatActivity {
 
         // If no end times are available (which shouldn't normally happen), show a message
         if (filteredEndTimes.isEmpty()) {
-            Toast.makeText(this, "No valid end times available", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(this, "No valid end times available", Toast.LENGTH_SHORT, R.style.exampleToast).show();
             return;
         }
 

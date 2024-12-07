@@ -22,6 +22,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.publictenniscourtavailabilitytracker.databinding.ActivityMapBinding;
 
+import io.github.muddz.styleabletoast.StyleableToast;
+
 
 public class Map extends FragmentActivity implements OnMapReadyCallback {
 
@@ -190,7 +192,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
             BookingManager.deleteBooking(parkName, selectedCourt, selectedDate, startMinutes, endMinutes);
 
             // Notify the user
-            Toast.makeText(Map.this, "Booking cancelled", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(Map.this, "Booking cancelled", Toast.LENGTH_SHORT, R.style.exampleToast).show();
 
             // Optionally, return to Map or any other relevant activity
             Intent intent = new Intent(Map.this, Map.class);
