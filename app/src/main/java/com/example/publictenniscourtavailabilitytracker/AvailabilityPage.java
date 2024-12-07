@@ -41,8 +41,8 @@ public class AvailabilityPage extends AppCompatActivity {
     TextView selectedTimerTextView = null; // To store the selected TextView
     int selectedCourtNumber = -1;
 
-    // List to store court data (name + status)
-    List<String> courtData = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +61,6 @@ public class AvailabilityPage extends AppCompatActivity {
         //get court detail values
         name = getIntent().getStringExtra("park_name");
         int numofCourts = getIntent().getIntExtra("numofCourts", 0);
-
-
 
         //generate appropriate courts + timers
         try {
@@ -106,7 +104,7 @@ public class AvailabilityPage extends AppCompatActivity {
             courtTextView.setTypeface(null, Typeface.BOLD);
 
 
-            //Timer TextView with background color
+            //Timer TextView
             TextView timerTextView = new TextView(this);
             timerTextView.setTextSize(20);
             timerTextView.setTypeface(null, Typeface.BOLD);
@@ -118,28 +116,30 @@ public class AvailabilityPage extends AppCompatActivity {
                 public void onClick(View v) {
 
                     if (selectedTimerTextView != null) {
-                        selectedTimerTextView.setBackgroundResource(R.drawable.title_background); // Reset background
+                        selectedTimerTextView.setBackgroundResource(R.drawable.title_background); //reset background
                     }
 
-                    // Mark the new selection
+                    //mark the new selection
                     selectedTimerTextView = timerTextView;
-                    selectedCourtNumber = courtIndex + 1; // Set the court number (1-based index)
+                    selectedCourtNumber = courtIndex + 1; //set the court number
 
-                    // Apply the selected background
+                    //apply the selected background
                     if ("Free to Play".equals(timerTextView.getText())) {
-                        timerTextView.setBackgroundResource(R.drawable.when_clicked); // Selected free court
+                        timerTextView.setBackgroundResource(R.drawable.when_clicked); //selected free court
                     } else {
-                       // timerTextView.setBackgroundResource(R.drawable.when_clicked_red); // Selected occupied court
+                        //show toast if user selectes an unavailable timer
                         StyleableToast.makeText(AvailabilityPage.this, "Court is in use. Please select a free court to play!", R.style.exampleToast).show();
                     }
                 }
             });
 
-            if("00:00".equals(time)){ // if court is available
+            if("00:00".equals(time)){ //if court is available
+                //set the ui elements
                 timerTextView.setBackgroundResource(R.drawable.title_background);
                 timerTextView.setTextColor(Color.parseColor("#4faa79"));
                 timerTextView.setText("Free to Play");
             }else {  //if court is not available
+                //set the ui elements
                 timerTextView.setBackgroundResource(R.drawable.title_background);
                 timerTextView.setTextColor(Color.parseColor("#ff3131"));
 
@@ -148,10 +148,10 @@ public class AvailabilityPage extends AppCompatActivity {
                 int minutes = Integer.parseInt(timeParts[0]);
                 int seconds = Integer.parseInt(timeParts[1]);
 
-                // Convert the time to milliseconds
-                long timeInMillis = (minutes * 60 + seconds) * 1000; // Convert to milliseconds
+                //convert the time to milliseconds
+                long timeInMillis = (minutes * 60 + seconds) * 1000;
 
-                // Create the CountDownTimer with the parsed time
+                //create the CountDownTimer with the parsed time
                 CountDownTimer countDownTimer = new CountDownTimer(timeInMillis, 1000) { // Timer duration in ms
                     public void onTick(long millisUntilFinished) {
                         long remainingMinutes = (millisUntilFinished / 1000) / 60;
@@ -161,19 +161,18 @@ public class AvailabilityPage extends AppCompatActivity {
 
                     public void onFinish() {
                         timerTextView.setText("Free to Play");
-                        timerTextView.setBackgroundResource(R.drawable.rounded_timer_green); // Change background when finished
+                        timerTextView.setBackgroundResource(R.drawable.rounded_timer_green); //change background when finished
                     }
                 };
 
                 countDownTimer.start(); //start the countdown timer
             }
 
-
-
             //create space inbetween the textviews
             Space space = new Space(this);
             space.setLayoutParams(new LinearLayout.LayoutParams(60, LinearLayout.LayoutParams.WRAP_CONTENT));
 
+            //make the views on the page
             courtLayout.addView(courtTextView);
             courtLayout.addView(space);
             courtLayout.addView(timerTextView);
@@ -187,27 +186,25 @@ public class AvailabilityPage extends AppCompatActivity {
 
     public void onStartGame(View view) {
         if (selectedTimerTextView == null) {
-            // Show Toast if no timerTextView is selected
-
+            //show toast if no timer is selected
             StyleableToast.makeText(AvailabilityPage.this, "Please select a free court to play!", R.style.exampleToast).show();
         } else {
             String selectedTime = selectedTimerTextView.getText().toString();
-
             if ("Free to Play".equals(selectedTime)) {
-                // Proceed with game start
+                //proceed with game start
                 Intent intent = new Intent(AvailabilityPage.this, Camera.class);
                 intent.putExtra("ParkName", name);
                 intent.putExtra("courtId", selectedCourtNumber);
-                startActivity(intent); // Start the new activity
+                startActivity(intent); //start the new activity
             } else {
-                // Show Toast if the selected timer is not free
+                //show Toast if the selected timer is not free
                 StyleableToast.makeText(AvailabilityPage.this, "Selected court is not free. Please choose another.", R.style.exampleToast).show();
 
             }
         }
     }
 
-
+    //getting number of courts
     public List<String> getCourtsForPark(String parkName) throws IOException {
         List<String> courts = new ArrayList<>();
         File file = new File(this.getFilesDir(), "courts_availability_data.txt");
