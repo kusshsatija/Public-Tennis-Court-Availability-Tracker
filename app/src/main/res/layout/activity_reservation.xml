@@ -5,6 +5,13 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/go_back_button"
+        style="@style/backButton"
+        android:clickable="true"
+        android:contentDescription="@string/back_button_description"
+        android:onClick="back" />
+
     <TextView
         android:id="@+id/park_name"
         android:layout_width="wrap_content"
@@ -109,30 +116,14 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/go_back_button"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="Go Back"
-            android:padding="16dp"
-            android:textSize="16sp"
-            style="@style/button"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/book_now_button"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="Book Now"
-            android:padding="16dp"
-            android:textSize="16sp"
-            style="@style/button"/>
-    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/book_now_button"
+        style="@style/button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:text="Book Now" />
 </LinearLayout>

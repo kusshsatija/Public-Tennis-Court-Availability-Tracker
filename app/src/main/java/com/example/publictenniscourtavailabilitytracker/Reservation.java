@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,8 @@ public class Reservation extends AppCompatActivity {
     private TextView parkName;
     private CalendarView calendarView;
     private Spinner courtDropdown, startTimeDropdown, endTimeDropdown;
-    private Button goBackButton, bookNowButton;
+    private Button  bookNowButton;
+    private ImageView goBackButton;
     private List<String> timeSlots;
     private String selectedDate;
     private List<Boolean> availability;

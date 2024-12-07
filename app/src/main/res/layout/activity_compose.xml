@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:style="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
+    <ImageView
+        android:id="@+id/back_button"
+        style="@style/backButton"
+        android:onClick="finish"/>
+
 
     <Spinner
         android:id="@+id/recipientSpinner"

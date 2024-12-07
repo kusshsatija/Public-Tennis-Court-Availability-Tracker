@@ -144,11 +144,15 @@
         app:layout_constraintStart_toStartOf="parent"
         style="@style/button"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageView
         android:id="@+id/floatingActionButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_margin="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
+        android:src="@drawable/back"
         android:contentDescription="@string/back_button_description"
         android:onClick="back"
         app:layout_constraintStart_toStartOf="parent"

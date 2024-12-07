@@ -97,4 +97,8 @@ public class ComposeActivity extends AppCompatActivity {
             database.messageDao().insert(newMessage);
         }).start();
     }
+
+    public void finish(View v){
+        finish();
+    }
 }
