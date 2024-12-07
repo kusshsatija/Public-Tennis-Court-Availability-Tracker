@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database").allowMainThreadQueries().build();
         CommentDao commentDao = db.commentDao();
+        RatingDao ratingDao = db.ratingDao();
 
         Comment[] comments = {
                 new Comment("user1", "Tom", 3, "Honestly a very mid tennis court like it is mid in every way. It is not a bad tennis court but it is no a good tennis court just very mid.", "Gerstmar Park"),
@@ -108,6 +109,13 @@ public class MainActivity extends AppCompatActivity {
             if(commentDao.findByUserIdAndCourt(comment.userId,comment.court)==null){
                 commentDao.insertAll(comment);
             }
+            Rating rating = new Rating(comment.userId, comment.rating, comment.court);
+            if(ratingDao.findByUserIdAndCourt(comment.userId, comment.court)==null){
+                ratingDao.insert(rating);
+            }else{
+                ratingDao.update(rating);
+            }
         }
+
     }
 }
